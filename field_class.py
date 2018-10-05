@@ -1,4 +1,7 @@
-from... import *
+from potato_class import *
+from wheat_class import *
+from sheep_class import *
+from cow_class import *
 
 class Field ():
     """Simulata a field tha can hold animals and crops"""
@@ -22,7 +25,7 @@ class Field ():
         else:
             return False
 
-    def harves_crop (self,position):
+    def harvest_crop (self,position):
         return self._crops.pop(position)
 
     def remove_animal (self,position):
@@ -36,7 +39,7 @@ def display_crops(crop_list):
         print("{0:>2}. {1}".format(pos,crop.report()))
         pos += 1
 
-def display_animals(crop_list):
+def display_animals(animal_list):
     print()
     print("These animals are in this field")
     pos = 1
@@ -44,7 +47,7 @@ def display_animals(crop_list):
         print("{0:>2}. {1}".format(pos,animal.report()))
         pos += 1
 
-def select_crops(length_list):
+def select_crop(length_list):
     valid = False
     while not valid:
         selected = int(input("Please select a crop: "))
@@ -72,5 +75,24 @@ def harvest_crop_from_field(field):
 def remove_animal_from_field(field):
     display_animals(field._animals)
     selected_animal = select_animal(len(field._animals))
-    return field.harvest_animal(selected_animal)
+    return field.remove_animal(selected_animal)
+
+
+
+
+
+def main():
+    newy = Field(5,2)
+    newy.plant_crop(Wheat())
+    newy.plant_crop(Potato())
+    newy.add_animal(Sheep("Shaun"))
+    newy.add_animal(Cow("Jim"))
+    harvest_crop_from_field(newy)
+    print(newy._crops)
+    remove_animal_from_field(newy)
+    print(newy._animals)
+
+main()
+
+
 
